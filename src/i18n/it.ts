@@ -9,7 +9,7 @@ export const it: Translations = {
   },
   hero: {
     badge: 'Mondello, Palermo — Sicilia',
-    title: 'La tua casa al mare',
+    title: 'La tua casa a 2 passi dal mare',
     subtitle:
       'Tre camere doppie private nel cuore di Mondello, ciascuna con bagno en suite e angolo cottura, a 900 metri dalla spiaggia.',
     ctaPrimary: 'Prenota ora',

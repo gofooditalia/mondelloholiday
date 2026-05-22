@@ -9,7 +9,7 @@ export const en: Translations = {
   },
   hero: {
     badge: 'Mondello, Palermo — Sicily',
-    title: 'Your home by the sea',
+    title: 'Your home steps from the sea',
     subtitle:
       'Three private double rooms in the heart of Mondello, each with en-suite bathroom and kitchenette, 900 metres from the beach.',
     ctaPrimary: 'Book now',
