@@ -9,44 +9,69 @@ interface Props {
 const { lang } = Astro.props;
 const tr = t(lang);
 
-const images: { file: string; it: string; en: string }[] = [
-  { file: 'thenicebright_ingresso_001', it: 'Ingresso della casa su strada', en: 'Street entrance of the house' },
-  { file: 'thenicebright_ingresso_002', it: 'Portone d\'ingresso', en: 'Front door' },
-  { file: 'thenicebright_001', it: 'Corridoio', en: 'Hallway' },
-  { file: 'pellegrino_003', it: 'Pellegrino: camera matrimoniale con balcone', en: 'Pellegrino: double bedroom with balcony' },
-  { file: 'pellegrino_002', it: 'Camera Pellegrino', en: 'Pellegrino room' },
-  { file: 'pellegrino_004', it: 'Camera Pellegrino, vista verso il balcone', en: 'Pellegrino room, view towards the balcony' },
-  { file: 'pellegrino_001', it: 'Camera Pellegrino con TV e appendiabiti', en: 'Pellegrino room with TV and clothes rack' },
-  { file: 'pellegrino_005', it: 'Letto matrimoniale della camera Pellegrino', en: 'Double bed in the Pellegrino room' },
-  { file: 'pellegrino_006', it: 'Camera Pellegrino', en: 'Pellegrino room' },
-  { file: 'pellegrino_007', it: 'Camera Pellegrino', en: 'Pellegrino room' },
-  { file: 'laerte_001', it: 'Pellegrino: seconda camera con due letti singoli', en: 'Pellegrino: second bedroom with two single beds' },
-  { file: 'laerte_002', it: 'Pellegrino: seconda camera', en: 'Pellegrino: second bedroom' },
-  { file: 'laerte_003', it: 'Pellegrino: seconda camera', en: 'Pellegrino: second bedroom' },
-  { file: 'pellegrino_view_002', it: 'Vista sul Monte Pellegrino dal balcone', en: 'View of Monte Pellegrino from the balcony' },
-  { file: 'pellegrino_view_001', it: 'Vista dal balcone della camera Pellegrino', en: 'View from the Pellegrino room balcony' },
-  { file: 'pellegrino_view_003', it: 'Balcone con vista sulle montagne', en: 'Balcony with mountain view' },
-  { file: 'pellegrino_bath_002', it: 'Bagno della camera Pellegrino', en: 'Pellegrino room bathroom' },
-  { file: 'pellegrino_bath_001', it: 'Bagno con vasca della camera Pellegrino', en: 'Pellegrino room bathroom with bathtub' },
-  { file: 'bagno_001', it: 'Bagno con vasca', en: 'Bathroom with bathtub' },
-  { file: 'clio_camera_001', it: 'Camera Clio', en: 'Clio room' },
-  { file: 'clio_camera_004', it: 'Camera Clio con TV e scrivania', en: 'Clio room with TV and desk' },
-  { file: 'clio_camera_002', it: 'Camera Clio', en: 'Clio room' },
-  { file: 'clio_camera_003', it: 'Camera Clio', en: 'Clio room' },
-  { file: 'clio_camera_008', it: 'Camera Clio', en: 'Clio room' },
-  { file: 'clio_camera_006', it: 'Camera Clio', en: 'Clio room' },
-  { file: 'clio_camera_007', it: 'Camera Clio', en: 'Clio room' },
-  { file: 'clio_camera_005', it: 'Letto con asciugamani puliti', en: 'Bed with fresh towels' },
-  { file: 'clio_cucina_001', it: 'Angolo cottura della camera Clio', en: 'Clio room kitchenette' },
-  { file: 'clio_cucina_004', it: 'Angolo cottura con macchina del caffè', en: 'Kitchenette with coffee machine' },
-  { file: 'clio_cucina_005', it: 'Angolo cottura', en: 'Kitchenette' },
-  { file: 'clio_cucina_003', it: 'Angolo cottura e camera Clio', en: 'Kitchenette and Clio room' },
-  { file: 'clio_cucina_006', it: 'Camera Clio', en: 'Clio room' },
-  { file: 'clio_cucina_002', it: 'Finestra dell\'angolo cottura', en: 'Kitchenette window' },
-  { file: 'clio_bath_001', it: 'Bagno della camera Clio', en: 'Clio room bathroom' },
-  { file: 'clio_bath_002', it: 'Bagno della camera Clio', en: 'Clio room bathroom' },
-  { file: 'clio_bath_003', it: 'Bagno con doccia della camera Clio', en: 'Clio room bathroom with shower' },
-  { file: 'clio_bath_004', it: 'Bagno della camera Clio', en: 'Clio room bathroom' },
+type Photo = { file: string; it: string; en: string };
+type Group = { id: string; title: { it: string; en: string }; desc: { it: string; en: string }; photos: Photo[] };
+
+// Galleria suddivisa per alloggio: ogni gruppo ha il suo lightbox
+const groups: Group[] = [
+  {
+    id: 'pellegrino',
+    title: { it: 'Pellegrino', en: 'Pellegrino' },
+    desc: { it: 'Quadrupla · camera matrimoniale + camera doppia · bagno ad uso esclusivo · balcone con vista', en: 'Quadruple · double bedroom + twin room · private bathroom · balcony with view' },
+    photos: [
+      { file: 'pellegrino_003', it: 'Pellegrino: camera matrimoniale con balcone', en: 'Pellegrino: double bedroom with balcony' },
+      { file: 'pellegrino_002', it: 'Camera Pellegrino', en: 'Pellegrino room' },
+      { file: 'pellegrino_004', it: 'Camera Pellegrino, vista verso il balcone', en: 'Pellegrino room, view towards the balcony' },
+      { file: 'pellegrino_001', it: 'Camera Pellegrino con TV e appendiabiti', en: 'Pellegrino room with TV and clothes rack' },
+      { file: 'pellegrino_005', it: 'Letto matrimoniale della camera Pellegrino', en: 'Double bed in the Pellegrino room' },
+      { file: 'pellegrino_006', it: 'Camera Pellegrino', en: 'Pellegrino room' },
+      { file: 'pellegrino_007', it: 'Camera Pellegrino', en: 'Pellegrino room' },
+      { file: 'laerte_001', it: 'Pellegrino: seconda camera con due letti singoli', en: 'Pellegrino: second bedroom with two single beds' },
+      { file: 'laerte_002', it: 'Pellegrino: seconda camera', en: 'Pellegrino: second bedroom' },
+      { file: 'laerte_003', it: 'Pellegrino: seconda camera', en: 'Pellegrino: second bedroom' },
+      { file: 'pellegrino_view_002', it: 'Vista sul Monte Pellegrino dal balcone', en: 'View of Monte Pellegrino from the balcony' },
+      { file: 'pellegrino_view_001', it: 'Vista dal balcone della camera Pellegrino', en: 'View from the Pellegrino room balcony' },
+      { file: 'pellegrino_view_003', it: 'Balcone con vista sulle montagne', en: 'Balcony with mountain view' },
+      { file: 'pellegrino_bath_002', it: 'Bagno della camera Pellegrino', en: 'Pellegrino room bathroom' },
+      { file: 'pellegrino_bath_001', it: 'Bagno con vasca della camera Pellegrino', en: 'Pellegrino room bathroom with bathtub' },
+      { file: 'bagno_001', it: 'Bagno con vasca', en: 'Bathroom with bathtub' },
+    ],
+  },
+  {
+    id: 'clio',
+    title: { it: 'Camera Clio', en: 'Clio room' },
+    desc: { it: 'Doppia · bagno privato ad uso esclusivo · angolo cottura in camera', en: 'Double · private bathroom · in-room kitchenette' },
+    photos: [
+      { file: 'clio_camera_001', it: 'Camera Clio', en: 'Clio room' },
+      { file: 'clio_camera_004', it: 'Camera Clio con TV e scrivania', en: 'Clio room with TV and desk' },
+      { file: 'clio_camera_002', it: 'Camera Clio', en: 'Clio room' },
+      { file: 'clio_camera_003', it: 'Camera Clio', en: 'Clio room' },
+      { file: 'clio_camera_008', it: 'Camera Clio', en: 'Clio room' },
+      { file: 'clio_camera_006', it: 'Camera Clio', en: 'Clio room' },
+      { file: 'clio_camera_007', it: 'Camera Clio', en: 'Clio room' },
+      { file: 'clio_camera_005', it: 'Letto con asciugamani puliti', en: 'Bed with fresh towels' },
+      { file: 'clio_cucina_001', it: 'Angolo cottura della camera Clio', en: 'Clio room kitchenette' },
+      { file: 'clio_cucina_004', it: 'Angolo cottura con macchina del caffè', en: 'Kitchenette with coffee machine' },
+      { file: 'clio_cucina_005', it: 'Angolo cottura', en: 'Kitchenette' },
+      { file: 'clio_cucina_003', it: 'Angolo cottura e camera Clio', en: 'Kitchenette and Clio room' },
+      { file: 'clio_cucina_006', it: 'Camera Clio', en: 'Clio room' },
+      { file: 'clio_cucina_002', it: 'Finestra dell\'angolo cottura', en: 'Kitchenette window' },
+      { file: 'clio_bath_001', it: 'Bagno della camera Clio', en: 'Clio room bathroom' },
+      { file: 'clio_bath_002', it: 'Bagno della camera Clio', en: 'Clio room bathroom' },
+      { file: 'clio_bath_003', it: 'Bagno con doccia della camera Clio', en: 'Clio room bathroom with shower' },
+      { file: 'clio_bath_004', it: 'Bagno della camera Clio', en: 'Clio room bathroom' },
+    ],
+  },
+  {
+    id: 'ingresso',
+    title: { it: 'Ingresso', en: 'Entrance' },
+    desc: { it: 'Ingresso della casa e corridoio', en: 'House entrance and hallway' },
+    photos: [
+      { file: 'thenicebright_ingresso_001', it: 'Ingresso della casa su strada', en: 'Street entrance of the house' },
+      { file: 'thenicebright_ingresso_002', it: 'Portone d\'ingresso', en: 'Front door' },
+      { file: 'thenicebright_001', it: 'Corridoio', en: 'Hallway' },
+    ],
+  },
 ];
 ---
 
@@ -64,40 +89,61 @@ const images: { file: string; it: string; en: string }[] = [
       <div class="mt-5 w-14 h-0.5 bg-amber-400 mx-auto"></div>
     </div>
 
-    <!-- Photo grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      {images.map((img) => {
-        const alt = img[lang] ?? img.it;
-        return (
+    <!-- Quick nav -->
+    <div class="flex flex-wrap justify-center gap-2 mb-12">
+      {groups.map((g) => (
         <a
-          href={`/images/${img.file}.jpg`}
-          class="glightbox group relative overflow-hidden rounded-xl block"
-          data-gallery="mondello"
-          data-description={alt}
-          style="aspect-ratio: 3/2;"
+          href={`#galleria-${g.id}`}
+          class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:border-amber-400 hover:text-slate-900 transition-colors"
         >
-          <img
-            src={`/images/${img.file}.jpg`}
-            alt={alt}
-            loading="lazy"
-            decoding="async"
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
-            <svg
-              class="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
+          {g.title[lang]}
+          <span class="text-xs font-normal text-slate-400">{g.photos.length}</span>
         </a>
-        );
-      })}
+      ))}
     </div>
+
+    {groups.map((g) => (
+      <div id={`galleria-${g.id}`} class="mb-16 last:mb-0 scroll-mt-24">
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-1 border-b border-slate-100 pb-3">
+          <h3 class="font-display text-2xl lg:text-3xl font-bold text-slate-800">{g.title[lang]}</h3>
+          <p class="text-sm text-slate-500">{g.desc[lang]}</p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+          {g.photos.map((img) => {
+            const alt = img[lang] ?? img.it;
+            return (
+              <a
+                href={`/images/${img.file}.jpg`}
+                class="glightbox group relative overflow-hidden rounded-xl block"
+                data-gallery={g.id}
+                data-description={alt}
+                style="aspect-ratio: 3/2;"
+              >
+                <img
+                  src={`/images/${img.file}.jpg`}
+                  alt={alt}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
+                  <svg
+                    class="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    ))}
   </div>
 </section>
 
