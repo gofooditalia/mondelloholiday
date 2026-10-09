@@ -44,7 +44,7 @@ export interface Translations {
   booking: {
     title: string;
     subtitle: string;
-    bookOnAirbnb: string;
+    bookOnline: string;
     comingSoon: string;
     emailCta: string;
   };
@@ -58,7 +58,7 @@ export interface Translations {
   prices: {
     title: string;
     subtitle: string;
-    airbnbCard: {
+    platformCard: {
       label: string;
       note: string;
       cta: string;

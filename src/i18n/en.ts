@@ -22,8 +22,8 @@ export const en: Translations = {
   booking: {
     title: 'Choose your accommodation',
     subtitle:
-      'The property has two units: the Clio room, a double with en-suite bathroom and kitchenette, and Pellegrino, a quadruple made up of a double bedroom and a twin room with a private bathroom for exclusive use. Book directly on Airbnb or contact us for information.',
-    bookOnAirbnb: 'Book on Airbnb',
+      'The property has two units: the Clio room, a double with en-suite bathroom and kitchenette, and Pellegrino, a quadruple made up of a double bedroom and a twin room with a private bathroom for exclusive use. Guests of both units share the living room, lounge and back balcony. Book directly on Holidu or contact us for information.',
+    bookOnline: 'Book on Holidu',
     comingSoon: 'Coming soon',
     emailCta: 'Send us an email',
   },
@@ -37,16 +37,16 @@ export const en: Translations = {
   },
   prices: {
     title: 'Prices',
-    subtitle: 'Up-to-date rates are available on Airbnb. Book by email and get an exclusive discount.',
-    airbnbCard: {
+    subtitle: 'Up-to-date rates are available on Holidu. Book by email and get an exclusive discount.',
+    platformCard: {
       label: 'Official rates',
-      note: 'Prices vary by season and availability. Check Airbnb for real-time updated rates.',
-      cta: 'View prices on Airbnb',
+      note: 'Prices vary by season and availability. Check Holidu for real-time updated rates.',
+      cta: 'View prices on Holidu',
     },
     discountCard: {
       badge: 'Exclusive offer',
       title: 'Book by email, save more',
-      desc: 'If your preferred dates are available and you book directly by email, we will apply a discount compared to the rates published on Airbnb.',
+      desc: 'If your preferred dates are available and you book directly by email, we will apply a discount compared to the rates published online.',
       cta: 'Request the discount',
     },
     minStay: 'Minimum stay: 2 nights',

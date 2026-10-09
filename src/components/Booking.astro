@@ -10,23 +10,25 @@ interface Props {
 const { lang } = Astro.props;
 const tr = t(lang);
 
+// Annuncio Holidu (canale preferito: commissioni più basse). Contiene entrambe le unità.
+const HOLIDU_URL = 'https://www.holidu.com/d/69629882';
+
 const rooms = [
   {
     name: 'Camera Clio',
     features: {
-      it: ['Bagno en suite', 'Angolo cottura', 'Camera doppia privata'],
-      en: ['En-suite bathroom', 'Kitchenette', 'Private double room'],
+      it: ['Camera doppia privata', 'Bagno privato ad uso esclusivo', 'Angolo cottura in camera', 'Soggiorno, salone e balcone retro in comune'],
+      en: ['Private double room', 'Private bathroom for exclusive use', 'In-room kitchenette', 'Shared living room, lounge and back balcony'],
     },
-    airbnb: 'https://www.airbnb.it/rooms/1629916151179013176',
+    url: HOLIDU_URL,
   },
   {
-    // ✏️  Aggiorna airbnb quando hai il link di Pellegrino
     name: 'Pellegrino',
     features: {
-      it: ['Quadrupla: camera matrimoniale + camera doppia', 'Bagno ad uso esclusivo', 'Balcone con vista sul Monte Pellegrino'],
-      en: ['Quadruple: double bedroom + twin room', 'Private bathroom for exclusive use', 'Balcony with view of Monte Pellegrino'],
+      it: ['Quadrupla: camera matrimoniale + camera doppia', 'Bagno ad uso esclusivo', 'Balcone con vista sul Monte Pellegrino', 'Soggiorno, salone e balcone retro in comune'],
+      en: ['Quadruple: double bedroom + twin room', 'Private bathroom for exclusive use', 'Balcony with view of Monte Pellegrino', 'Shared living room, lounge and back balcony'],
     },
-    airbnb: '',
+    url: HOLIDU_URL,
   },
 ];
 ---
@@ -48,7 +50,7 @@ const rooms = [
     <!-- Room cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 max-w-3xl mx-auto">
       {rooms.map((room) => {
-        const available = !!room.airbnb;
+        const available = !!room.url;
         const features = lang === 'it' ? room.features.it : room.features.en;
         return (
           <div class={[
@@ -88,7 +90,7 @@ const rooms = [
 
             {available ? (
               <a
-                href={room.airbnb}
+                href={room.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-semibold text-sm px-5 py-3 rounded-full transition-all duration-200 hover:scale-105 shadow-md"
@@ -96,7 +98,7 @@ const rooms = [
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.75 17.5c-.414 0-.75-.336-.75-.75v-5h-1.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75H12V8.75c0-.414.336-.75.75-.75s.75.336.75.75V10.25h1.5c.414 0 .75.336.75.75s-.336.75-.75.75h-1.5v5c0 .414-.336.75-.75.75zm0-10.5c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z"/>
                 </svg>
-                {tr.booking.bookOnAirbnb}
+                {tr.booking.bookOnline}
               </a>
             ) : (
               <div class="flex items-center justify-center gap-2 bg-sky-700/50 text-sky-400 text-sm px-5 py-3 rounded-full cursor-not-allowed">

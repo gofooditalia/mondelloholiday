@@ -22,8 +22,8 @@ export const it: Translations = {
   booking: {
     title: 'Scegli il tuo alloggio',
     subtitle:
-      'La struttura dispone di due alloggi: la camera Clio, una doppia con bagno en suite e angolo cottura, e Pellegrino, una quadrupla composta da una camera matrimoniale e una camera doppia con bagno ad uso esclusivo. Prenota direttamente su Airbnb o contattaci per informazioni.',
-    bookOnAirbnb: 'Prenota su Airbnb',
+      'La struttura dispone di due alloggi: la camera Clio, una doppia con bagno en suite e angolo cottura, e Pellegrino, una quadrupla composta da una camera matrimoniale e una camera doppia con bagno ad uso esclusivo. Gli ospiti di entrambi gli alloggi condividono soggiorno, salone e balcone retro. Prenota direttamente su Holidu o contattaci per informazioni.',
+    bookOnline: 'Prenota su Holidu',
     comingSoon: 'In arrivo',
     emailCta: 'Scrivici un\'email',
   },
@@ -37,16 +37,16 @@ export const it: Translations = {
   },
   prices: {
     title: 'Prezzi',
-    subtitle: 'Le tariffe aggiornate sono consultabili su Airbnb. Prenota via email e ottieni uno sconto esclusivo.',
-    airbnbCard: {
+    subtitle: 'Le tariffe aggiornate sono consultabili su Holidu. Prenota via email e ottieni uno sconto esclusivo.',
+    platformCard: {
       label: 'Tariffe ufficiali',
-      note: 'I prezzi variano in base alla stagione e alla disponibilità. Consulta Airbnb per le tariffe aggiornate in tempo reale.',
-      cta: 'Vedi i prezzi su Airbnb',
+      note: 'I prezzi variano in base alla stagione e alla disponibilità. Consulta Holidu per le tariffe aggiornate in tempo reale.',
+      cta: 'Vedi i prezzi su Holidu',
     },
     discountCard: {
       badge: 'Offerta esclusiva',
       title: 'Prenota via email, risparmi di più',
-      desc: 'Se le date che desideri sono disponibili e prenoti direttamente tramite email, applicheremo uno sconto rispetto alle tariffe pubblicate su Airbnb.',
+      desc: 'Se le date che desideri sono disponibili e prenoti direttamente tramite email, applicheremo uno sconto rispetto alle tariffe pubblicate online.',
       cta: 'Richiedi lo sconto',
     },
     minStay: 'Soggiorno minimo: 2 notti',
