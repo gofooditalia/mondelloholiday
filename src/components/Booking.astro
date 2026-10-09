@@ -21,14 +21,11 @@ const rooms = [
   },
   {
     // ✏️  Aggiorna airbnb quando hai il link di Pellegrino
-    name: 'Camera Pellegrino',
-    features: { it: ['Bagno en suite', 'Angolo cottura', 'Camera doppia privata'], en: ['En-suite bathroom', 'Kitchenette', 'Private double room'] },
-    airbnb: '',
-  },
-  {
-    // ✏️  Aggiorna airbnb quando hai il link di Laerte
-    name: 'Camera Laerte',
-    features: { it: ['Bagno en suite', 'Angolo cottura', 'Camera doppia privata'], en: ['En-suite bathroom', 'Kitchenette', 'Private double room'] },
+    name: 'Pellegrino',
+    features: {
+      it: ['Quadrupla: camera matrimoniale + camera doppia', 'Bagno ad uso esclusivo', 'Balcone con vista sul Monte Pellegrino'],
+      en: ['Quadruple: double bedroom + twin room', 'Private bathroom for exclusive use', 'Balcony with view of Monte Pellegrino'],
+    },
     airbnb: '',
   },
 ];
@@ -49,7 +46,7 @@ const rooms = [
     </div>
 
     <!-- Room cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 max-w-3xl mx-auto">
       {rooms.map((room) => {
         const available = !!room.airbnb;
         const features = lang === 'it' ? room.features.it : room.features.en;

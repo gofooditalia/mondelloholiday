@@ -11,7 +11,7 @@ export const en: Translations = {
     badge: 'Mondello, Palermo — Sicily',
     title: 'Your home steps from the sea',
     subtitle:
-      'Three private double rooms in the heart of Mondello, each with en-suite bathroom and kitchenette, 900 metres from the beach.',
+      'Two private units in the heart of Mondello, for couples and families, 900 metres from the beach.',
     ctaPrimary: 'Book now',
     ctaSecondary: 'Discover the rooms',
   },
@@ -20,9 +20,9 @@ export const en: Translations = {
     subtitle: 'Bright and welcoming spaces for your holiday in Sicily',
   },
   booking: {
-    title: 'Choose your room',
+    title: 'Choose your accommodation',
     subtitle:
-      'The property has 3 private double rooms, each with en-suite bathroom and kitchenette. Book directly on Airbnb or contact us for information.',
+      'The property has two units: the Clio room, a double with en-suite bathroom and kitchenette, and Pellegrino, a quadruple made up of a double bedroom and a twin room with a private bathroom for exclusive use. Book directly on Airbnb or contact us for information.',
     bookOnAirbnb: 'Book on Airbnb',
     comingSoon: 'Coming soon',
     emailCta: 'Send us an email',
@@ -56,8 +56,8 @@ export const en: Translations = {
     namePlaceholder: 'Your name',
     email: 'Email',
     emailPlaceholder: 'your@email.com',
-    room: 'Room',
-    roomDefault: 'Choose a room',
+    room: 'Accommodation',
+    roomDefault: 'Choose an accommodation',
     checkin: 'Check-in date',
     checkout: 'Check-out date',
     message: 'Message (optional)',

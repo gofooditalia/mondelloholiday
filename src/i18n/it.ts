@@ -11,7 +11,7 @@ export const it: Translations = {
     badge: 'Mondello, Palermo — Sicilia',
     title: 'La tua casa a 2 passi dal mare',
     subtitle:
-      'Tre camere doppie private nel cuore di Mondello, ciascuna con bagno en suite e angolo cottura, a 900 metri dalla spiaggia.',
+      'Due alloggi privati nel cuore di Mondello, per coppie e famiglie, a 900 metri dalla spiaggia.',
     ctaPrimary: 'Prenota ora',
     ctaSecondary: 'Scopri le camere',
   },
@@ -20,9 +20,9 @@ export const it: Translations = {
     subtitle: 'Spazi luminosi e accoglienti per le tue vacanze in Sicilia',
   },
   booking: {
-    title: 'Scegli la tua camera',
+    title: 'Scegli il tuo alloggio',
     subtitle:
-      'La struttura dispone di 3 camere doppie private, ciascuna con bagno en suite e angolo cottura. Prenota direttamente su Airbnb o contattaci per informazioni.',
+      'La struttura dispone di due alloggi: la camera Clio, una doppia con bagno en suite e angolo cottura, e Pellegrino, una quadrupla composta da una camera matrimoniale e una camera doppia con bagno ad uso esclusivo. Prenota direttamente su Airbnb o contattaci per informazioni.',
     bookOnAirbnb: 'Prenota su Airbnb',
     comingSoon: 'In arrivo',
     emailCta: 'Scrivici un\'email',
@@ -56,8 +56,8 @@ export const it: Translations = {
     namePlaceholder: 'Il tuo nome',
     email: 'Email',
     emailPlaceholder: 'la-tua@email.com',
-    room: 'Camera',
-    roomDefault: 'Scegli una camera',
+    room: 'Alloggio',
+    roomDefault: 'Scegli un alloggio',
     checkin: 'Data di arrivo',
     checkout: 'Data di partenza',
     message: 'Messaggio (opzionale)',
