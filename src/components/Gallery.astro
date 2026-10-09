@@ -109,13 +109,31 @@ const groups: Group[] = [
           <p class="text-sm text-slate-500">{g.desc[lang]}</p>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
-          {g.photos.map((img) => {
+        <div class="relative" data-strip>
+          <button
+            type="button"
+            data-strip-prev
+            aria-label={lang === 'it' ? 'Foto precedenti' : 'Previous photos'}
+            class="strip-btn hidden md:flex absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center rounded-full bg-white text-slate-800 shadow-lg ring-1 ring-slate-200 hover:bg-amber-400 transition-all"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <button
+            type="button"
+            data-strip-next
+            aria-label={lang === 'it' ? 'Foto successive' : 'Next photos'}
+            class="strip-btn hidden md:flex absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center rounded-full bg-white text-slate-800 shadow-lg ring-1 ring-slate-200 hover:bg-amber-400 transition-all"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </button>
+
+        <div data-strip-track class="strip-track flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth scroll-px-4 sm:scroll-px-0 -mx-4 px-4 sm:mx-0 sm:px-0 pb-1">
+          {g.photos.map((img, i) => {
             const alt = img[lang] ?? img.it;
             return (
               <a
                 href={`/images/${img.file}.jpg`}
-                class="glightbox group relative overflow-hidden rounded-xl block"
+                class="glightbox group relative overflow-hidden rounded-xl block shrink-0 snap-start w-[66%] sm:w-[45%] lg:w-[28%]"
                 data-gallery={g.id}
                 data-description={alt}
                 style="aspect-ratio: 3/2;"
@@ -123,7 +141,7 @@ const groups: Group[] = [
                 <img
                   src={`/images/${img.file}.jpg`}
                   alt={alt}
-                  loading="lazy"
+                  loading={i < 4 ? 'eager' : 'lazy'}
                   decoding="async"
                   class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -142,13 +160,39 @@ const groups: Group[] = [
             );
           })}
         </div>
+        </div>
       </div>
     ))}
   </div>
 </section>
 
+<style>
+  .strip-track { scrollbar-width: none; }
+  .strip-track::-webkit-scrollbar { display: none; }
+  .strip-btn[disabled] { opacity: 0; pointer-events: none; }
+</style>
+
 <script is:inline>
 document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[data-strip]').forEach(function (strip) {
+    var track = strip.querySelector('[data-strip-track]');
+    var prev = strip.querySelector('[data-strip-prev]');
+    var next = strip.querySelector('[data-strip-next]');
+    function step() {
+      var item = track.querySelector('a');
+      return item ? (item.getBoundingClientRect().width + 12) * 2 : track.clientWidth * 0.8;
+    }
+    function update() {
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    }
+    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+
   if (typeof GLightbox !== 'undefined') {
     GLightbox({
       selector: '.glightbox',
