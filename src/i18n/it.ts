@@ -71,6 +71,6 @@ export const it: Translations = {
   footer: {
     tagline: 'Casa vacanze a Mondello, Palermo',
     contact: 'Contatti',
-    rights: '© 2025 Mondello Holiday. Tutti i diritti riservati.',
+    rights: `© ${new Date().getFullYear()} Mondello Holiday. Tutti i diritti riservati.`,
   },
 };

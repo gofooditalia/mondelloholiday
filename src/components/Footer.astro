@@ -65,5 +65,21 @@ const homeHref = lang === 'it' ? '/' : '/en/';
         <a href="/en/" class={['hover:text-slate-400 transition-colors', lang === 'en' ? 'text-slate-400' : ''].join(' ')}>EN</a>
       </div>
     </div>
+
+    <!-- Credits -->
+    <div class="mt-8 flex justify-center">
+      <div class="group flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10 transition-all hover:bg-white/10">
+        <span class="text-[10px] uppercase font-bold tracking-widest text-slate-500">{lang === 'it' ? 'Sviluppato da' : 'Developed by'}</span>
+        <a href="https://gofoodmenu.it/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
+          <img
+            src="/credits/icon.svg"
+            alt="GO!Food Italia"
+            width="80"
+            height="24"
+            class="h-5 w-auto brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
+          />
+        </a>
+      </div>
+    </div>
   </div>
 </footer>

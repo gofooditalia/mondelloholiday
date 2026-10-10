@@ -71,6 +71,6 @@ export const en: Translations = {
   footer: {
     tagline: 'Holiday home in Mondello, Palermo',
     contact: 'Contact',
-    rights: '© 2025 Mondello Holiday. All rights reserved.',
+    rights: `© ${new Date().getFullYear()} Mondello Holiday. All rights reserved.`,
   },
 };
