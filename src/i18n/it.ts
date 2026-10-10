@@ -22,7 +22,7 @@ export const it: Translations = {
   booking: {
     title: 'Scegli il tuo alloggio',
     subtitle:
-      'La struttura dispone di due alloggi: la camera Clio, una doppia con bagno en suite e angolo cottura, e Pellegrino, una quadrupla composta da una camera matrimoniale e una camera doppia con bagno ad uso esclusivo. Gli ospiti di entrambi gli alloggi condividono soggiorno, salone e balcone retro. Prenota direttamente su Holidu o contattaci per informazioni.',
+      'Due alloggi privati in un appartamento al primo piano: la Mini-Casa Clio, per 1–2 ospiti, con bagno privato e angolo cottura, e Pellegrino, fino a 4 ospiti, con camera matrimoniale, camera doppia e bagno ad uso esclusivo. Soggiorno, salone e balcone retro sono in comune, quindi potresti incontrare altri ospiti. Prenota direttamente su Holidu o contattaci per informazioni.',
     bookOnline: 'Prenota su Holidu',
     comingSoon: 'In arrivo',
     emailCta: 'Scrivici un\'email',

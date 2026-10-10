@@ -22,7 +22,7 @@ export const en: Translations = {
   booking: {
     title: 'Choose your accommodation',
     subtitle:
-      'The property has two units: the Clio room, a double with en-suite bathroom and kitchenette, and Pellegrino, a quadruple made up of a double bedroom and a twin room with a private bathroom for exclusive use. Guests of both units share the living room, lounge and back balcony. Book directly on Holidu or contact us for information.',
+      'Two private units in a first-floor apartment: Mini-Casa Clio, for 1–2 guests, with private bathroom and kitchenette, and Pellegrino, for up to 4 guests, with a double bedroom, a twin room and a private bathroom for exclusive use. The living room, lounge and back balcony are shared, so you may meet other guests. Book directly on Holidu or contact us for information.',
     bookOnline: 'Book on Holidu',
     comingSoon: 'Coming soon',
     emailCta: 'Send us an email',

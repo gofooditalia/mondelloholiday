@@ -55,7 +55,10 @@ const homeHref = lang === 'it' ? '/' : '/en/';
 
     <!-- Bottom bar -->
     <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
-      <p>{tr.footer.rights}</p>
+      <div class="flex flex-col items-center sm:items-start gap-1">
+        <p>{tr.footer.rights}</p>
+        <p>CIN IT082053C2MZ827RWO · CIR 19082053C258632</p>
+      </div>
       <div class="flex gap-4">
         <a href="/" class={['hover:text-slate-400 transition-colors', lang === 'it' ? 'text-slate-400' : ''].join(' ')}>IT</a>
         <span>|</span>
