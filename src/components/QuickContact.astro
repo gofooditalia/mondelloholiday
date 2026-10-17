@@ -1,0 +1,123 @@
+---
+import type { Lang } from '../i18n/index';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const isIT = lang === 'it';
+const q = {
+  open:        isIT ? 'Prenota o contattaci' : 'Book or contact us',
+  close:       isIT ? 'Chiudi' : 'Close',
+  title:       isIT ? 'Prenota o contattaci' : 'Book or contact us',
+  description: isIT ? 'Indica le date per ricevere il prezzo scontato' : 'Include your dates for a discounted rate',
+  name:        isIT ? 'Nome' : 'Name',
+  namePh:      isIT ? 'Il tuo nome' : 'Your name',
+  emailPh:     isIT ? 'email@esempio.com' : 'email@example.com',
+  checkin:     isIT ? 'Data arrivo' : 'Check-in date',
+  checkout:    isIT ? 'Data partenza' : 'Check-out date',
+  message:     isIT ? 'Messaggio' : 'Message',
+  messagePh:   isIT ? 'Domande o richieste...' : 'Questions or requests...',
+  submit:      isIT ? 'Invia richiesta' : 'Send request',
+  submitting:  isIT ? 'Invio in corso…' : 'Sending…',
+  ok:          isIT ? 'Grazie! Ti risponderemo entro 24 ore.' : 'Thank you! We will reply within 24 hours.',
+  error:       isIT ? 'Invio non riuscito. Scrivici a info@gofood.it.' : 'Sending failed. Email us at info@gofood.it.',
+};
+---
+
+<div id="qc" class="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+  <div id="qc-panel" hidden class="w-[min(22rem,calc(100vw-2.5rem))] rounded-2xl bg-white shadow-2xl border border-slate-100 overflow-hidden">
+    <div class="bg-sky-900 text-white px-5 py-4">
+      <p class="font-semibold">{q.title}</p>
+      <p class="text-sm text-sky-100">{q.description}</p>
+    </div>
+    <form id="qc-form" class="p-5 flex flex-col gap-3 text-sm" data-lang={lang}>
+      <div class="hidden" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off" /></div>
+      <label class="flex flex-col gap-1 text-slate-600">{q.name} *
+        <input name="name" required placeholder={q.namePh} class="qc-input" />
+      </label>
+      <label class="flex flex-col gap-1 text-slate-600">Email *
+        <input name="email" type="email" required placeholder={q.emailPh} class="qc-input" />
+      </label>
+      <div class="grid grid-cols-2 gap-3">
+        <label class="flex flex-col gap-1 text-slate-600">{q.checkin}
+          <input name="checkin" type="date" class="qc-input" />
+        </label>
+        <label class="flex flex-col gap-1 text-slate-600">{q.checkout}
+          <input name="checkout" type="date" class="qc-input" />
+        </label>
+      </div>
+      <label class="flex flex-col gap-1 text-slate-600">{q.message}
+        <textarea name="message" rows="3" placeholder={q.messagePh} class="qc-input resize-none"></textarea>
+      </label>
+      <button type="submit" class="mt-1 bg-amber-400 hover:bg-amber-500 text-slate-900 font-semibold rounded-full py-2.5 transition-colors disabled:opacity-60" data-label={q.submit} data-submitting={q.submitting}>{q.submit}</button>
+      <p id="qc-status" class="text-center" role="status" aria-live="polite" data-ok={q.ok} data-error={q.error}></p>
+    </form>
+  </div>
+  <button id="qc-toggle" type="button" aria-expanded="false" aria-controls="qc-panel" aria-label={q.open} data-open={q.open} data-close={q.close}
+    class="w-14 h-14 rounded-full bg-amber-400 hover:bg-amber-500 shadow-lg shadow-amber-400/40 flex items-center justify-center transition-colors">
+    <svg id="qc-icon-open" class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z" /></svg>
+    <svg id="qc-icon-close" class="w-6 h-6 text-white hidden" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" /></svg>
+  </button>
+</div>
+
+<style>
+  .qc-input {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.625rem;
+    padding: 0.5rem 0.75rem;
+    color: #1e293b;
+    background: #f8fafc;
+    font: inherit;
+    outline: none;
+  }
+  .qc-input:focus { border-color: #0ea5e9; background: #fff; }
+</style>
+
+<script is:inline>
+  // Pulsante rapido: apre un piccolo modulo che invia a /api/contact (Resend → info@gofood.it)
+  (function () {
+    var toggle = document.getElementById('qc-toggle');
+    var panel = document.getElementById('qc-panel');
+    var form = document.getElementById('qc-form');
+    var status = document.getElementById('qc-status');
+    var iconOpen = document.getElementById('qc-icon-open');
+    var iconClose = document.getElementById('qc-icon-close');
+    if (!toggle || !panel || !form) return;
+
+    toggle.addEventListener('click', function () {
+      var open = panel.hidden;
+      panel.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? toggle.dataset.close : toggle.dataset.open);
+      iconOpen.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      button.textContent = button.dataset.submitting;
+      status.textContent = '';
+      var data = Object.fromEntries(new FormData(form).entries());
+      data.lang = form.dataset.lang;
+      data.source = 'widget';
+      fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) {
+          if (!r.ok) throw new Error();
+          form.reset();
+          status.className = 'text-center text-emerald-600';
+          status.textContent = status.dataset.ok;
+        })
+        .catch(function () {
+          status.className = 'text-center text-rose-600';
+          status.textContent = status.dataset.error;
+        })
+        .finally(function () { button.disabled = false; button.textContent = button.dataset.label; });
+    });
+  })();
+</script>

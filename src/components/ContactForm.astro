@@ -15,8 +15,8 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
 
 <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
 
-  <!-- Success state — shown by @formspree/ajax on submission -->
-  <div data-fs-success class="text-center py-6">
+  <!-- Messaggio di conferma: mostrato dopo l'invio riuscito -->
+  <div data-cf-success hidden class="text-center py-6">
     <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-5">
       <svg class="w-8 h-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -26,10 +26,11 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
     <p class="text-slate-500 text-sm">{f.successMsg}</p>
   </div>
 
-  <!-- Form-level error — filled and shown by @formspree/ajax on failure -->
-  <div data-fs-error class="mb-5 text-sm text-rose-600 bg-rose-50 border border-rose-100 rounded-lg px-4 py-3"></div>
+  <!-- Errore di invio -->
+  <div data-cf-error hidden class="mb-5 text-sm text-rose-600 bg-rose-50 border border-rose-100 rounded-lg px-4 py-3">{f.errorMsg}</div>
 
-  <form id="contact-form">
+  <form id="contact-form" data-lang={lang} data-submitting={f.submitting}>
+    <div class="hidden" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off" /></div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
 
       <!-- Name -->
@@ -38,9 +39,8 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
         <input
           id="cf-name" name="name" type="text" required
           placeholder={f.namePlaceholder}
-          data-fs-field class="field-input"
+          class="field-input"
         />
-        <span data-fs-error="name" class="err-msg"></span>
       </div>
 
       <!-- Email -->
@@ -49,15 +49,14 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
         <input
           id="cf-email" name="email" type="email" required
           placeholder={f.emailPlaceholder}
-          data-fs-field class="field-input"
+          class="field-input"
         />
-        <span data-fs-error="email" class="err-msg"></span>
       </div>
 
       <!-- Room (full width) -->
       <div class="flex flex-col gap-1 sm:col-span-2">
         <label class="field-label" for="cf-room">{f.room}</label>
-        <select id="cf-room" name="room" data-fs-field class="field-input">
+        <select id="cf-room" name="room" class="field-input">
           <option value="">{f.roomDefault}</option>
           {rooms.map((r) => <option value={r}>{r}</option>)}
         </select>
@@ -69,9 +68,8 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
         <input
           id="cf-checkin" name="checkin" type="date" required
           min={today}
-          data-fs-field class="field-input"
+          class="field-input"
         />
-        <span data-fs-error="checkin" class="err-msg"></span>
       </div>
 
       <!-- Check-out -->
@@ -80,9 +78,8 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
         <input
           id="cf-checkout" name="checkout" type="date" required
           min={today}
-          data-fs-field class="field-input"
+          class="field-input"
         />
-        <span data-fs-error="checkout" class="err-msg"></span>
       </div>
 
       <!-- Message (full width) -->
@@ -91,16 +88,14 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
         <textarea
           id="cf-message" name="message" rows="3"
           placeholder={f.messagePlaceholder}
-          data-fs-field class="field-input resize-none"
+          class="field-input resize-none"
         ></textarea>
-        <span data-fs-error="message" class="err-msg"></span>
       </div>
 
     </div>
 
     <button
       type="submit"
-      data-fs-submit-btn
       class="mt-6 w-full flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-semibold text-base px-8 py-3.5 rounded-full transition-all duration-200 hover:scale-[1.02] shadow-md shadow-amber-400/30 disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
     >
       <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -140,22 +135,19 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
   }
   .field-input::placeholder { color: #94a3b8; }
   select.field-input { appearance: auto; }
-  .err-msg {
-    font-size: 0.75rem;
-    color: #f43f5e;
-    min-height: 1rem;
-  }
 </style>
 
-<!-- Formspree queue stub — must run before the CDN script -->
 <script is:inline>
-  window.formspree = window.formspree || function () {
-    (formspree.q = formspree.q || []).push(arguments);
-  };
-  formspree('initForm', { formElement: '#contact-form', formId: 'meedkgev' });
+  // Invio della richiesta a /api/contact (Resend → info@gofood.it)
+  (function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var box = form.parentElement;
+    var success = box.querySelector('[data-cf-success]');
+    var error = box.querySelector('[data-cf-error]');
+    var button = form.querySelector('button[type="submit"]');
+    var label = button.innerHTML;
 
-  // Keep checkout min in sync with checkin
-  document.addEventListener('DOMContentLoaded', function () {
     var cin = document.getElementById('cf-checkin');
     var cout = document.getElementById('cf-checkout');
     if (cin && cout) {
@@ -164,6 +156,24 @@ const rooms = ['Mini-Casa Clio (1–2 ospiti)', 'Pellegrino (fino a 4 ospiti)'];
         if (cout.value && cout.value <= this.value) cout.value = '';
       });
     }
-  });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      error.hidden = true;
+      button.disabled = true;
+      button.textContent = form.dataset.submitting;
+      var data = Object.fromEntries(new FormData(form).entries());
+      data.lang = form.dataset.lang;
+      data.source = 'form';
+      fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) {
+          if (!r.ok) throw new Error();
+          form.hidden = true;
+          success.hidden = false;
+        })
+        .catch(function () { error.hidden = false; })
+        .finally(function () { button.disabled = false; button.innerHTML = label; });
+    });
+  })();
 </script>
-<script is:inline src="https://unpkg.com/@formspree/ajax@1" defer></script>
