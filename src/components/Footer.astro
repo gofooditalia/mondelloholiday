@@ -11,7 +11,7 @@ const tr = t(lang);
 const homeHref = lang === 'it' ? '/' : '/en/';
 ---
 
-<footer class="bg-slate-900 text-slate-300 py-12">
+<footer class="bg-slate-900 text-slate-300 pt-12 pb-4">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
 
@@ -67,19 +67,17 @@ const homeHref = lang === 'it' ? '/' : '/en/';
     </div>
 
     <!-- Credits -->
-    <div class="mt-8 flex justify-center">
-      <div class="group flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10 transition-all hover:bg-white/10">
-        <span class="text-[10px] uppercase font-bold tracking-widest text-slate-500">{lang === 'it' ? 'Sviluppato da' : 'Developed by'}</span>
-        <a href="https://gofoodmenu.it/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
-          <img
-            src="/credits/icon.svg"
-            alt="GO!Food Italia"
-            width="80"
-            height="24"
-            class="h-5 w-auto brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
-          />
-        </a>
-      </div>
+    <div class="mt-8 pt-3 border-t border-slate-800 flex justify-center">
+      <a
+        href="https://gofood.it"
+        target="_blank"
+        rel="noopener"
+        title="GO!Food Italia – software e siti web a Palermo"
+        class="flex items-center gap-1 text-[10px] text-slate-500 hover:text-slate-300 transition-colors"
+      >
+        <span class="whitespace-nowrap">{lang === 'it' ? 'Sito realizzato da' : 'Website by'}</span>
+        <img src="/credits/gofood.svg" alt="GO!Food Italia" width="26" height="20" class="h-5 w-auto shrink-0 opacity-80" />
+      </a>
     </div>
   </div>
 </footer>
