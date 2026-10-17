@@ -66,7 +66,7 @@ export const it: Translations = {
     submitting: 'Invio in corso…',
     successTitle: 'Richiesta inviata!',
     successMsg: 'Grazie per averci scritto. Ti risponderemo entro 24 ore.',
-    errorMsg: 'Si è verificato un errore. Riprova o scrivici direttamente a italiagofood@gmail.com.',
+    errorMsg: 'Si è verificato un errore. Riprova o scrivici direttamente a info@gofood.it.',
   },
   footer: {
     tagline: 'Casa vacanze a Mondello, Palermo',

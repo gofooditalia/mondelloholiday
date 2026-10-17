@@ -66,7 +66,7 @@ export const en: Translations = {
     submitting: 'Sending…',
     successTitle: 'Request sent!',
     successMsg: 'Thank you for writing to us. We will reply within 24 hours.',
-    errorMsg: 'Something went wrong. Please try again or email us directly at italiagofood@gmail.com.',
+    errorMsg: 'Something went wrong. Please try again or email us directly at info@gofood.it.',
   },
   footer: {
     tagline: 'Holiday home in Mondello, Palermo',
